@@ -43,7 +43,9 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: "productdetails",
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+        cart: "cart@http://localhost:3003/remoteEntry.js",
+      },
       exposes: {
         "./ProductDetails": "./src/components/ProductDetails",
       },

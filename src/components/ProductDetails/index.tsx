@@ -1,16 +1,26 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { Product } from "./types";
 import PRODUCTS from "./constants";
+
+import useCart from "cart/useCart";
 
 import "tailwindcss/tailwind.css";
 
 export default function ProductDetails() {
   const { id } = useParams();
+  const [cart, setCart] = useCart();
 
   const product: Product =
     PRODUCTS.find((product: Product) => product.id === id) ?? PRODUCTS[0];
+
+  const isProductInCart =
+    cart.findIndex((p: Product) => p.id === product.id) !== -1;
+
+  const handleAddProductToCart = () => {
+    setCart([...cart, { ...product, quantity: 1 }]);
+  };
 
   return (
     <div className="pd-flex pd-w-full pd-transform pd-text-left pd-text-base pd-transition md:pd-my-8 md:pd-max-w-2xl md:pd-px-4 lg:pd-max-w-4xl pd-mx-auto">
@@ -303,12 +313,22 @@ export default function ProductDetails() {
                   </fieldset>
                 </div>
 
-                <button
-                  type="submit"
-                  className="pd-mt-6 pd-flex pd-w-full pd-items-center pd-justify-center pd-rounded-md pd-border pd-border-transparent pd-bg-indigo-600 pd-px-8 pd-py-3 pd-text-base pd-font-medium pd-text-white hover:pd-bg-indigo-700 focus:pd-outline-none focus:pd-ring-2 focus:pd-ring-indigo-500 focus:pd-ring-offset-2"
-                >
-                  Adicionar ao carrinho
-                </button>
+                {isProductInCart ? (
+                  <Link
+                    to="/carrinho"
+                    className="pd-mt-6 pd-flex pd-w-full pd-items-center pd-justify-center pd-rounded-md pd-border pd-border-transparent !pd-bg-gray-600 pd-px-8 pd-py-3 pd-text-base pd-font-medium pd-text-white !hover:pd-bg-gray-700 focus:pd-outline-none focus:pd-ring-2 focus:pd-ring-gray-500 focus:pd-ring-offset-2"
+                  >
+                    Ir para o carrinho
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleAddProductToCart}
+                    className="pd-mt-6 pd-flex pd-w-full pd-items-center pd-justify-center pd-rounded-md pd-border pd-border-transparent !pd-bg-indigo-600 pd-px-8 pd-py-3 pd-text-base pd-font-medium pd-text-white !hover:pd-bg-indigo-700 focus:pd-outline-none focus:pd-ring-2 focus:pd-ring-indigo-500 focus:pd-ring-offset-2"
+                  >
+                    Adicionar ao carrinho
+                  </button>
+                )}
               </form>
             </section>
           </div>
