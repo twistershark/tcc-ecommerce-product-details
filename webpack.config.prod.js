@@ -7,7 +7,7 @@ const deployURL = process.env.DEPLOY_URL || "http://localhost:3002";
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: deployURL,
+    publicPath: deployURL + "/",
   },
 
   resolve: {

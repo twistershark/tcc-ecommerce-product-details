@@ -3,10 +3,11 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 
 const deps = require("./package.json").dependencies;
 const cartURL = process.env.CART_URL || "http://localhost:3003";
+const deployURL = process.env.DEPLOY_URL || "http://localhost:3002";
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:3002/",
+    publicPath: deployURL + "/",
   },
 
   resolve: {
