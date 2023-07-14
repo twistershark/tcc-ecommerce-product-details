@@ -1,9 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
-import "./index.scss";
+import "./index.css";
 
-import { ProductDetails } from "./components/product-details";
+import ProductDetails from "./components/ProductDetails";
 
-const App = () => <ProductDetails />;
-ReactDOM.render(<App />, document.getElementById("app"));
+const App = () => (
+  <BrowserRouter>
+    <ProductDetails />
+  </BrowserRouter>
+);
+const root = createRoot(document.getElementById("app")!);
+root.render(<App />);
