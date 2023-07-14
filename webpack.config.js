@@ -2,6 +2,8 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 const deps = require("./package.json").dependencies;
+const cartURL = process.env.CART_URL || "http://localhost:3003";
+
 module.exports = (_, argv) => ({
   output: {
     publicPath: "http://localhost:3002/",
@@ -44,7 +46,7 @@ module.exports = (_, argv) => ({
       name: "productdetails",
       filename: "remoteEntry.js",
       remotes: {
-        cart: "cart@http://localhost:3003/remoteEntry.js",
+        cart: `cart@${cartURL}/remoteEntry.js`,
       },
       exposes: {
         "./ProductDetails": "./src/components/ProductDetails",
