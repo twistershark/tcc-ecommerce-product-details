@@ -1,6 +1,6 @@
 import { Product } from "../../domain/entities/product";
 
-interface ProductInCart extends Product {
+export interface ProductInCart extends Product {
   quantity: number;
 }
 
