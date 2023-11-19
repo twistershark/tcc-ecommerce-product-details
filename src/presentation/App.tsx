@@ -1,14 +1,15 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./index.css";
-
-import ProductDetails from "./components/ProductDetails";
+import ProductDetails from "./pages/product-details";
 
 const App = () => (
   <BrowserRouter>
-    <ProductDetails />
+    <Routes>
+      <Route index path="/produto/:id" element={<ProductDetails />} />
+    </Routes>
   </BrowserRouter>
 );
 const root = createRoot(document.getElementById("app")!);
