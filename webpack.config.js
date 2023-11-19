@@ -50,7 +50,7 @@ module.exports = (_, argv) => ({
         cart: `cart@${cartURL}/remoteEntry.js`,
       },
       exposes: {
-        "./ProductDetails": "./src/components/ProductDetails",
+        "./ProductDetails": "./src/presentation/pages/product-details",
       },
       shared: {
         ...deps,
