@@ -2,7 +2,6 @@ import { PRODUCTS } from "../../../../constants/products";
 import { Category, Product } from "../../../../domain/entities/product";
 import { ProductsRepositoryInterface } from "../../../../domain/repositories/products-repository-interface";
 import {
-  createRandomProduct,
   createRandomProducts,
 } from "../entities/mock-product";
 
