@@ -48,7 +48,7 @@ export default function ProductDetails() {
       product.category
     );
 
-    setProductsRecommendation(products);
+    setProductsRecommendation(products.filter((prod) => prod.productId !== id));
   }
 
   useEffect(() => {
@@ -102,16 +102,18 @@ export default function ProductDetails() {
           </div>
         </div>
 
-        <div>
-          <h3 className="pd-text-[#555] pd-text-2xl pd-font-normal pd-font-serif">
-            Talvez você goste
-          </h3>
-          <div className="pd-mt-6 pd-grid pd-grid-cols-1 pd-gap-x-6 pd-gap-y-10 sm:pd-grid-cols-2 lg:pd-grid-cols-4 xl:pd-gap-x-8">
-            {productsRecommendation.map((product) => (
-              <ProductItem key={product.id} product={product} />
-            ))}
+        {productsRecommendation.length ? (
+          <div>
+            <h3 className="pd-text-[#555] pd-text-2xl pd-font-normal pd-font-serif">
+              Talvez você goste
+            </h3>
+            <div className="pd-mt-6 pd-grid pd-grid-cols-1 pd-gap-x-6 pd-gap-y-10 sm:pd-grid-cols-2 lg:pd-grid-cols-4 xl:pd-gap-x-8">
+              {productsRecommendation.map((product) => (
+                <ProductItem key={product.id} product={product} />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </main>
   );
